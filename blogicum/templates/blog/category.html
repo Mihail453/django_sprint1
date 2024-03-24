@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+<!DOCTYPE html>
+{% load static %}
+{% block title %}
+Публикации в категории - 
+{% endblock %}
+{% block content %}
+{% load static %}
+      <div class="container py-5">
+        <h1>Публикации в категории - {{ category_slug }}</h1>   
+      </div>
+{% endblock %}
