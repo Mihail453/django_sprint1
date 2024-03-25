@@ -1,5 +1,7 @@
 from django.shortcuts import render
 
+from django.http import Http404
+
 
 posts = [
     {
@@ -56,6 +58,10 @@ def category_posts(request, category_slug):
 
 
 def post_detail(request, id):
-    template_name = 'blog/detail.html',
-    context = {'post': posts[id]}
-    return render(request, template_name, context)
+    """Blogicum Post Detail page."""
+    try:
+        context = {'post': posts[id]}
+    except IndexError:
+        raise Http404(f'Post with {id=} does not exist.')
+
+    return render(request, 'blog/detail.html', context)
