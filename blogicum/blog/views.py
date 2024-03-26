@@ -58,10 +58,13 @@ def category_posts(request, category_slug):
 
 
 def post_detail(request, id):
-    """Blogicum Post Detail page."""
-    try:
-        context = {'post': posts[id]}
-    except IndexError:
+    dict = {a: None for a in range(len(posts))}
+    i = 0
+    for post in posts:
+        dict[i] = post['id']
+        i += 1
+    if id not in dict:
         raise Http404(f'Post with {id=} does not exist.')
-
+    else:
+        context = {'post': posts[id]}
     return render(request, 'blog/detail.html', context)
