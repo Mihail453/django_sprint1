@@ -47,6 +47,11 @@ posts = [
 ]
 
 
+posts_id: list = []
+for i in posts:
+    posts_id.append(i['id'])
+
+
 def index(request):
     return render(request, template_name='blog/index.html',
                   context={'posts': posts})
@@ -58,13 +63,7 @@ def category_posts(request, category_slug):
 
 
 def post_detail(request, id):
-    dict = {a: None for a in range(len(posts))}
-    i = 0
-    for post in posts:
-        dict[i] = post['id']
-        i += 1
-    if id not in dict:
+    if id not in posts_id:
         raise Http404(f'Post with {id=} does not exist.')
-    else:
-        context = {'post': posts[id]}
+    context = {'post': posts[id]}
     return render(request, 'blog/detail.html', context)
