@@ -65,5 +65,5 @@ def category_posts(request, category_slug):
 def post_detail(request, id):
     if id not in posts_id:
         raise Http404(f'Post with {id=} does not exist.')
-    context = {'post': posts[id]}
+    context = {'post': posts[posts_id.index(id)]}
     return render(request, 'blog/detail.html', context)
